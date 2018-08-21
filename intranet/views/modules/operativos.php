@@ -41,7 +41,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table id="tablaUsuarios" class="display table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+          <table id="tablaPerfiles" class="display table table-striped table-bordered table-hover" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -60,7 +60,7 @@
   </div>
 </div>
 
-<div id="modalUsuarios" class="modal fade" role="dialog">
+<div id="modalPerfiles" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header modal-header-success text-center w-100">
@@ -71,13 +71,10 @@
         <div class="row">
           <div class="col-12"><br></div>
         </div>
-        <p style="visibility:hidden; display:none;" id="idUsuario"></p>
+        <p style="visibility:hidden; display:none;" id="idPerfil"></p>
         <div class="input-group mb-3 col-12">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Nombre</b></span>
-          </div>
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Apellido Paterno</b></span>
+            <span class="input-group-text" id="basic-addon3"><b>Perfil</b></span>
           </div>
           <input type="text" class="form-control" id="perfil" aria-describedby="basic-addon3">
         </div>
@@ -104,10 +101,10 @@
 
     actualiza();
 
-    // cargaClientes();
-    // $('#cliente').val("0");
+    cargaClientes();
+    $('#cliente').val("0");
 
-    $('#tablaUsuarios').dataTable({
+    $('#tablaPerfiles').dataTable({
       "autoWidth": true,
       "responsive": true,
       "processing": true,
@@ -232,7 +229,7 @@
     return false;
   }
 
-  $('#modalUsuarios').on('hidden.bs.modal', function (e) {
+  $('#modalPerfiles').on('hidden.bs.modal', function (e) {
     $('#cliente').val("0");
   });
 
@@ -242,12 +239,12 @@
 
   function modificar(detalles){
 
-    $('#elHeaderConNombre').html('Editar ' + detalles[0].nombre);
-    $('#idUsu').html(detalles[0].id);
-    $('#nombre').val(detalles[0],nombre);
+    $('#elHeaderConNombre').html('Editar ' + detalles[0].perfil);
+    $('#idPerfil').html(detalles[0].id);
+    $('#perfil').val(detalles[0].perfil);
     $('#cliente').val(detalles[0].idCliente);
 
-    $('#modalUsuarios').modal('show');
+    $('#modalPerfiles').modal('show');
 
   }
 
@@ -255,14 +252,14 @@
 
     var ok = true;
 
-    var idUsu = $('#idUsuario').html();
-    var nombre = $('#nombre').val();
+    var idPerf = $('#idPerfil').html();
+    var perfil = $('#perfil').val();
     var cliente = $('#cliente').val();
 
     if(perfil==""){
       ok=false;
       showInfo("Complete el título para el perfil");
-      $('#nombre').focus();
+      $('#perfil').focus();
       e.defaultPrevent();
     }
 
@@ -281,11 +278,11 @@
 
           if (response.info[0].success) {
 
-            var miTable = $('#tablaUsuarios').DataTable();
+            var miTable = $('#tablaPerfiles').DataTable();
             miTable.ajax.reload(null, false);
 
             showMessage("El perfil "+perfil+" se actualizó exitosamente!");
-            $('#modalUsuarios').modal('hide');
+            $('#modalPerfiles').modal('hide');
 
           }else if(response.info[0].error=='EXISTE'){
             showInfo("Ya existe el perfil "+perfil+" asignado a este cliente!");
@@ -310,7 +307,7 @@
     }
 
     swal({
-      title: "Realmente deseas " + hab + " el usuario \""+detalles[0],nombre+"\"?",
+      title: "Realmente deseas " + hab + " el perfil \""+detalles[0].perfil+"\"?",
       type: "warning",
       showCancelButton: true,
       confirmButtonClass: "btn-danger",
@@ -335,10 +332,10 @@
 
             if (response.info[0].success) {
 
-              var miTable = $('#tablaUsuarios').DataTable();
+              var miTable = $('#tablaPerfiles').DataTable();
               miTable.ajax.reload(null, false);
 
-              var message = "El usuario \"" + detalles[0],nombre + "\", ha sido " + hab2;
+              var message = "El perfil \"" + detalles[0].perfil + "\", ha sido " + hab2;
               showMessage(message);
 
             }
