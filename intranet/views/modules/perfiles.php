@@ -88,7 +88,6 @@
       <div class="modal-footer text-justify">
         <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
         <button type="button" id="btnUpd" class="btn btn-success" onclick="updatePerfil();">Actualizar</button>
-        <!-- aqui valido para usar el mismo modal en insertar y actualizar  por eso hay dos botones-->
         <button type="button" id="btnIns" class="btn btn-success" onclick="insertaPerfil();">Guardar</button>
       </div>
     </div>
@@ -240,7 +239,6 @@
     $('#cliente').val("0");
   });
 
-  // funcion para insertar desaprece el boton actualizar y limpia los <campos></campos>
   function agregaPerfil(){
     $('#elHeaderConNombre').html('Agregar perfil');
     $('#idPerfil').html('');
@@ -252,7 +250,6 @@
     $('#modalPerfiles').modal('show');
   }
 
-  // funcion validar desaparece el boton insertar
   function modificar(detalles){
 
     $('#elHeaderConNombre').html('Editar ' + detalles[0].perfil);
@@ -260,7 +257,7 @@
     $('#perfil').val(detalles[0].perfil);
     $('#cliente').val(detalles[0].idCliente);
     $('#btnUpd').show();
-    $('#btnIns').hide();//aqui     
+    $('#btnIns').hide();     
 
     $('#modalPerfiles').modal('show');
 
