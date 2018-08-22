@@ -21,35 +21,45 @@
 		if($idP==0){
 			$sql ="SELECT 
 				usu.id,
-			    usu.nombre,
-			    per.perfil,
-			    cv.generales,
-			    cv.habilidades,
-			    cv.cursos,
-			    cv.ctecnicos,
-			    cv.experiencia,
-			    cv.archivo,
-			    cv.video
+				usu.nombre,
+				per.perfil,
+				cv.generales,
+				cv.habilidades,
+				cv.cursos,
+				cv.ctecnicos,
+				cv.experiencia,
+				cv.archivo,
+				cv.video,
+			    pos.cita1,
+			    pos.cita2,
+                sta.nombre as statusF
 			FROM gis.cv as cv
 			INNER JOIN gis.usuarios as usu ON cv.usuario = usu.id
 			INNER JOIN gis.perfiles as per ON cv.perfil = per.id
+			LEFT JOIN gis.postulaciones as pos ON cv.usuario = pos.usuario
+			LEFT JOIN gis.status as sta ON pos.status = sta.id
 			WHERE usu.activo=1 AND tipo = 'U'
 			;";
 		}else{
 			$sql ="SELECT 
 				usu.id,
-			    usu.nombre,
-			    per.perfil,
-			    cv.generales,
-			    cv.habilidades,
-			    cv.cursos,
-			    cv.ctecnicos,
-			    cv.experiencia,
-			    cv.archivo,
-			    cv.video
+				usu.nombre,
+				per.perfil,
+				cv.generales,
+				cv.habilidades,
+				cv.cursos,
+				cv.ctecnicos,
+				cv.experiencia,
+				cv.archivo,
+				cv.video,
+			    pos.cita1,
+			    pos.cita2,
+                sta.nombre as statusF
 			FROM gis.cv as cv
 			INNER JOIN gis.usuarios as usu ON cv.usuario = usu.id
 			INNER JOIN gis.perfiles as per ON cv.perfil = per.id
+			LEFT JOIN gis.postulaciones as pos ON cv.usuario = pos.usuario
+			LEFT JOIN gis.status as sta ON pos.status = sta.id
 			WHERE usu.activo=1 AND tipo = 'U' AND per.id=$idP
 			;";
 		}
@@ -70,6 +80,11 @@
 				$experiencia = $row['experiencia'];
 				$archivo = $row['archivo'];
 				$video = $row['video'];
+				$citasR = $row['cita1'];
+				$citasC = $row['cita2'];
+				$statusF = $row['statusF'];
+
+				if($statusF=="") $statusF = "Activo";
 
 				$sqlP ="SELECT COUNT(*) as postulado FROM gis.postulaciones WHERE vacante=$idR AND usuario=$id;";
 				$resultP = mysqli_query($con, $sqlP);
@@ -78,14 +93,19 @@
 
 				$detA = [];
 
+				$citasRS = "";
+				$citasCS = "";
+
 				$detA[] = array(
 					'id' => $id,
 					'idR' => $idR,
 					'nombre' => $nombre,
 					'cv' => $archivo,
 					'video' => $video,
-					'postulado' => $postulado,
-					'q' => $sqlP
+					'postulado' => $postulado,					
+					'citasR' => $citasR,
+					'citasC' => $citasC,
+					'statusF' => $statusF
 				);
 
 				// $detalles = "<span title='Postular candidatos para $puesto' onclick='verVideo(".json_encode($detA).");return false;'><i class='far fa-address-book'></i></span>";
@@ -97,9 +117,15 @@
 
 					if($postulado==0){
 						$postular = "<span title='Postular a $nombre' onclick='postularCandidato(".json_encode($detA).");return false;'><button type='button' class='btn btn-danger btn-rounded btn-md ml-4'>Postular</button></span>";
-					}else{
-						$postular = "<span class='red' title='$nombre ya se ha postulado esta vacante!'><i class='fas fa-thumbs-up'></i></span>";
 					}
+					// else{
+
+					// 	$postular = "<span class='red' title='$nombre ya se ha postulado esta vacante!'><i class='fas fa-thumbs-up'></i></span>";
+						
+					// 	$citasR = "<span title='Agendar cita con $nombre con GIS' onclick='agendaCita(".json_encode($detA).",'R');return false;'><i class='material-icons'>alarm_on</i></span>";
+
+					// 	$citasC = "<span title='Agendar cita con $nombre con cliente' onclick='agendaCita(".json_encode($detA).",'C');return false;'><i class='material-icons'>alarm_on</i></span>";
+					// }
 				}else{
 					$cv="";
 					$postular="";
@@ -112,7 +138,12 @@
 				}
 
 				if($postulado==1){
+					
 					$postular = "<span class='red' title='$nombre ya esta postulado para esta vacante'><i class='fas fa-thumbs-up'></i></span>";
+					
+					$citasRS = "<span title='Agendar cita con $nombre con GIS' onclick='agendaCita(1,".json_encode($detA).");return false;'><i class='material-icons'>alarm_on</i></span>";
+
+					$citasCS = "<span title='Agendar cita con $nombre con cliente' onclick='agendaCita(2,".json_encode($detA).");return false;'><i class='material-icons'>alarm_on</i></span>";
 				}				
 
 				$recursos[] = array(
@@ -122,7 +153,10 @@
 					'detalle' => $generales,
 					'cv' => $cv,
 					'video' => $video,
-					'postular' => $postular
+					'postular' => $postular,					
+					'citasR' => $citasRS,
+					'citasC' => $citasCS,
+					'statusF' => $statusF
 				);
 			}
 		}			

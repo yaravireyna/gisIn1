@@ -150,6 +150,7 @@ span.red i.fas, span.red i.far, span.red i.fab{
   font-size: 1.8rem;
   cursor: pointer;
   color: red;
+  text-align: center;
 }
 
 span.principal i.fas, span.principal i.far{
@@ -220,6 +221,11 @@ a.text-info:hover, a.text-info:focus, a.text-info i.fas:hover, a.text-info i.fas
 
 .miclaseHead{
   text-align: center;
+}
+
+.miclaseHeadB{
+  text-align: center;
+  font-weight: bold;
 }
 
 .avatars > li + li {
@@ -789,3 +795,31 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }
+}
+
+#modalPostular span i.material-icons{
+  font-size: 2.2rem;
+  color: red;
+  cursor: pointer;
+}
+

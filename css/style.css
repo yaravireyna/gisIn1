@@ -7,98 +7,6 @@ body {
   width: 100vw;
 }
 
-/********************************modal********************************/
-
-.form-dark .font-small {
-  font-size: 0.8rem; }
-
-.form-dark [type="radio"] + label,
-.form-dark [type="checkbox"] + label {
-  font-size: 0.8rem; }
-
-.form-dark [type="checkbox"] + label:before {
-  top: 2px;
-  width: 15px;
-  height: 15px; }
-
-.form-dark .md-form label {
-  color: #fff; }
-
-.form-dark input[type=email]:focus:not([readonly]) {
-  border-bottom: 1px solid #00C851;
-  -webkit-box-shadow: 0 1px 0 0 #00C851;
-  box-shadow: 0 1px 0 0 #00C851; }
-
-.form-dark input[type=email]:focus:not([readonly]) + label {
-  color: #fff; }
-
-.form-dark input[type=password]:focus:not([readonly]) {
-  border-bottom: 1px solid #00C851;
-  -webkit-box-shadow: 0 1px 0 0 #00C851;
-  box-shadow: 0 1px 0 0 #00C851; }
-
-.form-dark input[type=password]:focus:not([readonly]) + label {
-  color: #fff; }
-
-.form-dark input[type="checkbox"] + label:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 17px;
-  height: 17px;
-  z-index: 0;
-  border: 1.5px solid #fff;
-  border-radius: 1px;
-  margin-top: 2px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s; }
-
-.form-dark input[type="checkbox"]:checked + label:before {
-  top: -4px;
-  left: -3px;
-  width: 12px;
-  height: 22px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: transparent #00c851 #00c851 transparent;
-  -webkit-transform: rotate(40deg);
-  -ms-transform: rotate(40deg);
-  transform: rotate(40deg);
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-origin: 100% 100%;
-  -ms-transform-origin: 100% 100%;
-  transform-origin: 100% 100%; }
-
-.form-dark .modal-header {
-    border-bottom: none;
-}
-
-/********************************modal********************************/
-
-.modal-content{
-  background: #f7f7f7;
-  width: 100%;
-  height: auto;
-  /*background: url('../img/dandelion-seeds-number-of-lion-screen-pilot-159056.jpeg') top center;*/
-  /*background: url() top center;*/
-  background-size: cover;
-  position: relative;
-}
-
-.alert-infoGIS {
-  background:rgba(0, 74, 173, 1);
-  border-color:rgb(74, 74, 173);
-  position: fixed;
-  top: 0;
-  left:-4px;
-  width:100%;
-}
-
-.mensajeGIS{
-  color: #FFFFFF;
-}
-
 /*.modal-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -131,7 +39,16 @@ body {
 .form-group label, .modal-title {
   display: inline-block;
   margin-bottom: .5rem;
-  color: #004A88;
+  color: #FFFFFF;
+}
+
+.close:not(:disabled):not(.disabled) {
+  cursor: pointer;
+  font-size: 2rem;
+  color: white;
+  position: absolute;
+  top: 25px;
+  right: 25px;
 }
 
 .debut{
@@ -1670,4 +1587,93 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
   font-size: 13px;
   color: #ccc;
+}
+
+/********************************modal********************************/
+
+.form-dark .font-small {
+  font-size: 0.8rem; }
+
+.form-dark [type="radio"] + label,
+.form-dark [type="checkbox"] + label {
+  font-size: 0.8rem; }
+
+.form-dark [type="checkbox"] + label:before {
+  top: 2px;
+  width: 15px;
+  height: 15px; }
+
+.form-dark .md-form label {
+  color: #fff; }
+
+.form-dark input[type=email]:focus:not([readonly]) {
+  border-bottom: 1px solid #00C851;
+  -webkit-box-shadow: 0 1px 0 0 #00C851;
+  box-shadow: 0 1px 0 0 #00C851; }
+
+.form-dark input[type=email]:focus:not([readonly]) + label {
+  color: #fff; }
+
+.form-dark input[type=password]:focus:not([readonly]) {
+  border-bottom: 1px solid #00C851;
+  -webkit-box-shadow: 0 1px 0 0 #00C851;
+  box-shadow: 0 1px 0 0 #00C851; }
+
+.form-dark input[type=password]:focus:not([readonly]) + label {
+  color: #fff; }
+
+.form-dark input[type="checkbox"] + label:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 17px;
+  height: 17px;
+  z-index: 0;
+  border: 1.5px solid #fff;
+  border-radius: 1px;
+  margin-top: 2px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s; }
+
+.form-dark input[type="checkbox"]:checked + label:before {
+  top: -4px;
+  left: -3px;
+  width: 12px;
+  height: 22px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent #00c851 #00c851 transparent;
+  -webkit-transform: rotate(40deg);
+  -ms-transform: rotate(40deg);
+  transform: rotate(40deg);
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  transform-origin: 100% 100%; }
+
+.form-dark .modal-header {
+  border-bottom: none;
+}
+
+/********************************modal********************************/
+
+.modal-content{
+  position: relative;
+  background: rgba(0,0,0, 0.80);
+  background-size: cover;
+  filter:brightness(0.8);
+}
+
+.alert-infoGIS {
+  background: #17a2b8; /*23,162,184*/
+  border-color:rgb(74, 74, 173);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+}
+
+.mensajeGIS{
+  color: #FFFFFF;
 }

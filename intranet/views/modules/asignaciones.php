@@ -236,7 +236,7 @@
 </div>
 
 <div id="modalPostular" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header modal-header-success text-center w-100">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="far fa-times-circle"></i></button>
@@ -286,9 +286,12 @@
                             <th>Perfil</th>
                             <th>Recurso</th>
                             <th>Detalles</th>
-                            <th>CV</th>
-                            <th>Video</th>
-                            <th>Postular</th>
+                            <th class="miclaseHead">CV</th>
+                            <th class="miclaseHead">Video</th>
+                            <th class="miclaseHead">Postular</th>
+                            <th class="miclaseHead">Cita GIS</th>
+                            <th class="miclaseHead">Cita Cliente</th>
+                            <th class="miclaseHeadB">Status</th>
                           </tr>
                         </thead>
                       </table>
@@ -353,6 +356,51 @@
             </div> -->
         </div>
     </div>
+</div>
+
+<div id="modalCita" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success text-center w-100">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="far fa-times-circle"></i></button>
+        <div><i class="material-icons text-white" style="font-size: 2.5rem;">calendar_today</i>
+          <p class="in-line display-5" id="headerCitas" style="color:#fff;"> </p></div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12"><br></div>
+        </div>
+
+        <p style="visibility:hidden; display:none;" id="idRecurso"></p>
+
+        <div class="col-6 form-group">
+          <b><label for="date">Fecha de la cita</label></b>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker11'>
+              <input type='text' class="form-control" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group col-12 mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Comentarios</b></span>
+          </div>
+          <textarea id="comentarios" class="form-control" aria-label="With textarea"></textarea>
+        </div>       
+
+      </div>
+      <div class="modal-footer text-justify">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success" onclick="guardaCita();">Agendar cita</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -835,8 +883,10 @@
       "processing": true,
 
       "columnDefs": [
-        { className: "miclaseHead", "targets": [0,1,2,3,4,5,6] },
-        // {"width": "10%", "targets": [1,2,4] },
+        { 
+          className: "miclaseHead", "targets": [0,1,2,3,4,5,6,7,8,9],
+          className: "miclaseHeadB", "targets": [9]
+        },
         {
           "targets": [0],
           "visible": false,
@@ -875,7 +925,25 @@
           "orderable": true,
           "searchable": true,
           "autoWidth": true
-        }        
+        },
+        {
+          "targets": [7],
+          "orderable": false,
+          "searchable": false,
+          "autoWidth": true
+        },
+        {
+          "targets": [8],
+          "orderable": false,
+          "searchable": false,
+          "autoWidth": true
+        },
+        {
+          "targets": [9],
+          "orderable": false,
+          "searchable": false,
+          "autoWidth": true
+        } 
       ],
 
       "ajax": {
@@ -896,7 +964,10 @@
         {"data": "detalle"},
         {"data": "cv"},
         {"data": "video"},
-        {"data": "postular"}
+        {"data": "postular"},
+        {"data": "citasR"},
+        {"data": "citasC"},
+        {"data": "statusF"}
       ],
       "language": {
         "url": "controllers/dataTablesRecursos.json"
@@ -921,6 +992,12 @@
   $('#modalVideo').on('hidden.bs.modal', function (e) {
     $('#videoCV').attr('src', '');
     
+    if($('#modalPostular').hasClass('show')) {
+      $('body').addClass('modal-open');
+    }
+  });
+
+  $('#modalCita').on('hidden.bs.modal', function (e) {    
     if($('#modalPostular').hasClass('show')) {
       $('body').addClass('modal-open');
     }
@@ -1061,6 +1138,154 @@
     });
     return false;
       
+  }
+
+
+  // $('#datetimepicker11').datetimepicker({
+  //   language:  'es',
+  //   daysOfWeekDisabled: [0, 6],
+  //   weekStart: 0,
+  //   todayBtn:  1,
+  //   autoclose: 1,
+  //   todayHighlight: 1,
+  //   startView: 2,
+  //   minView: 2,
+  //   forceParse: 0
+  // });
+
+  $('#datetimepicker11').on('changeDate', function() {
+
+    var date = new Date();
+
+    var dia = date.getDate();
+    var mes = date.getMonth();
+    var anio = date.getFullYear();
+    var horas = date.getHours();
+    var min = date.getMinutes();
+
+    dia = parseFloat(dia);
+    dia2 = parseFloat(dia);
+    mes = parseFloat(mes);
+
+    console.log(typeof(dia));
+    console.log(typeof(mes));
+
+    if(dia<10){
+      dia= dia +1;
+      dia="0"+dia;
+    }
+
+    if(dia2<10){
+      dia2= dia2 +1;
+      dia2="0"+dia2;
+    }else dia2= dia2 + 1;
+
+    if(mes<10){
+      mes= mes+1;
+      mes="0"+mes;
+    }    
+
+    var hoy = anio+"-"+mes+"-"+dia+" "+horas+":"+min;
+    var fechaAvialable = anio+"-"+mes+"-"+dia2+" 00:00";
+
+    var fecha = $('#datetimepicker11').data('date');
+
+    console.log("buena: "+fecha+"\n------"+hoy+"--"+fechaAvialable);
+    if(fecha<hoy){
+      $('#datetimepicker11').data('date',null);
+      $('#cita').val(null);
+      showError("Debes elegir una fecha válida");
+    }
+
+  });
+
+  // $('#datetimepicker11').datetimepicker();
+
+  $(function () {
+      $('#datetimepicker11').datetimepicker();
+  });
+
+  $('#modalCita').on('hidden.bs.modal', function () {
+    $('#datetimepicker11').data('date',null);
+    $('#cita').val(null);
+  });
+
+  // $('#ticketP').on('shown.bs.modal', function () {
+
+  //   $('#datetimepicker11').data('date',null);
+  //   $('#cita').val(null);
+
+  //   $("#ticketP .modal-footer #mensajeInfoP").html('Cargando, elementos...');
+
+  //   $('#listaDeEquiposP').empty();
+  //   $('#listaDeEquiposP').selectpicker('refresh');
+  //   $('#listaDeEquiposP').attr('disabled',true);
+  //   $('#listaDeEquiposP').selectpicker('refresh');
+
+  //   $.getJSON("rDispositivos.php", {'p':<?php echo $idEmpleado; ?>}, function(json) {
+
+  //     for(index in json.data){
+  //       $('#listaDeEquiposP').append($("<option />").val(json.data[index].idDispositivo).text(json.data[index].nombreDispositivo));
+  //     }
+  //     $('#listaDeEquiposP').selectpicker('refresh');
+
+  //     for(index in json.equipos){
+  //       $('#listaDeEquiposP').append($("<option />").val(json.equipos[index].idEquipo).text(json.equipos[index].nombreEquipo));
+  //     }
+  //     $('#listaDeEquiposP').append($("<option />").val(0).text('Otro'));
+  //     $('#listaDeEquiposP').selectpicker('refresh');         
+
+  //   });
+
+  //   $("#ticketP .modal-footer #mensajeInfoP").html('Cargando, citas...');
+
+  //   $.getJSON("rCitas.php", function(json) {
+
+  //     // for(index in json.data){
+  //     //   console.log(json.data[index]);
+  //     //   $('#datetimepicker11').datetimepicker('setDatesDisabled', json.data[index]);
+  //     // }
+
+  //     var miArray = [];
+
+  //     for(index in json.data){
+  //       miArray.push(json.data[index]);
+  //     }
+
+  //     $('#datetimepicker11').datetimepicker('setDatesDisabled', miArray);
+
+  //     console.log(miArray);
+
+
+  //   });
+  // });
+
+  function agendaCita(tipo, detalles){
+    var location = "";
+    if(tipo==1) location = "Grupo IS";
+    else if(tipo==2) location = "Cliente";
+    else console.log('error');
+    $('#idRecurso').html(detalles[0].id);
+    $('#headerCitas').html(detalles[0].nombre +' citas con ' + location);
+
+    $('#modalCita').modal('show');
+
+  }
+
+  function guardaCita(){
+    programado = $('#datetimepicker11').data('date');
+
+    console.log("******************"+programado);
+
+    // if(programado==undefined){
+    //   estaOk = false;
+    //   alert('Por favor selecciona una fecha para el Soporte Programado');
+    //   $('#ticketP .modal-body #datetimepicker11').focus();
+    // }
+
+    // success
+    // $('#datetimepicker11').data('date',null);
+    // $('#cita').val(null);
   }
 
 </script>

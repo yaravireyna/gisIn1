@@ -76,10 +76,10 @@
 
   <!-- date time picker -->
 
-  <script type="text/javascript" src="views/modules/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
-  <script type="text/javascript" src="views/modules/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="views/modules/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+  <script type="text/javascript" src="views/modules/js/bootstrap-datetimepicker.es.js" charset="UTF-8"></script>
 
-  <link href="views/modules/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+  <link href="views/modules/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
   <!--sweet alert-->    
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" integrity="sha256-Z8TW+REiUm9zSQMGZH4bfZi52VJgMqETCbPFlGRB1P8=" crossorigin="anonymous" />
