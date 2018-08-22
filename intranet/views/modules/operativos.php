@@ -21,7 +21,7 @@
   <!-- Breadcrumbs-->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="index.php?action=inicio">Administración</a>
+      <a href="index.php?action=inicio">Administración 1</a>
     </li>
     <li class="breadcrumb-item">
       <a href="index.php?action=operativos">Usuarios</a>
