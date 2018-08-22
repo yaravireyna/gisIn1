@@ -255,43 +255,49 @@
       </div>
     </section>
 
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Acceso al <b>Intranet de Grupo IS</b></h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>            
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <b><label for="user">Usuario:</label></b>
-                  <input type="text" class="form-control" id="user" class="form-control" placeholder="Correo electrónico" required autofocus>
-                </div>
-
-                <div class="form-group">
-                  <b><label for="pass">Contraseña:</label></b>
-                  <input type="password" class="form-control" id="pass" class="form-control" placeholder="Contraseña" required>
-                </div>
-
-              </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog form-dark" role="document">
+        <div class="modal-content card card-image">
+          <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+            <div class="modal-header text-center pb-4">
+              <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel"><strong>Acceso</strong> <a class="green-text font-weight-bold"><strong> GIS</strong></a></h3>
+              <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <span id="mensajeInfo" class="form-control-static pull-left">&nbsp;</span>
-            <button type="button" class="btn btn-primary" onclick="javascript:procesaIntra();">Entrar</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <div id="elmensaje" class="alert alert-infoGIS">
-              <p id="cualmensaje" class="mensajeGIS"><strong>Listo!</strong>XXX</p>
+
+            <div class="modal-body">
+              <div class="md-form mb-2 text-center">
+                <label data-error="wrong" data-success="right" for="Form-email5"><b style="color: white; font-style: italic; font-size: 1.4rem;">Usuario</b></label>
+                <input type="email" id="user" class="form-control validate white-text" placeholder="Correo electrónico" required="yes" autofocus="yes">
+              </div>
+
+              <div class="md-form pb-3 mt-3 mb-5 text-center">
+                <label data-error="wrong" data-success="right" for="Form-pass5"><b style="color: white; font-style: italic; font-size: 1.4rem;">Contraseña</b></label>
+                <input type="password" id="pass" class="form-control validate white-text" placeholder="Contraseña" required="yes">
+              </div>
+
+              <div class="row d-flex align-items-center mb-4">
+                <span id="mensajeInfo" style="color: white;" class="form-control-static pull-left">&nbsp;</span>
+                <div class="text-center mb-3 col-md-12">
+                    <button type="button" class="btn btn-info btn-block btn-rounded z-depth-1" onclick="javascript:procesaIntra();">Entrar</button>
+                </div>
+                <div id="elmensaje" class="alert alert-infoGIS">
+                  <p id="cualmensaje" class="mensajeGIS"><strong>Listo!</strong>XXX</p>
+                </div>                    
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                    <p class="font-small white-text d-flex justify-content-end">¿No tienes tu cuenta? <a href="../registro/" class="green-text ml-1 font-weight-bold"> Registrate</a></p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-
       </div>
-    </div>
+    </div>  
 
   </main>
 
@@ -372,18 +378,32 @@
       var user = $('#user').val();
       var pass = $('#pass').val();
 
-      //alert("user: " + user + "\n\rpass: " + pass);
-
       if(user==""){
         correcto = false;
         $('#myModal .modal-body #user').focus();
-        alert("Por favor, digita tu usuario");
+        // alert("Por favor, digita tu usuario");
+
+        $("#cualmensaje").html("<font color='white'><strong>Advertencia!</strong> Completa los campos.</font>");
+
+        $('#elmensaje').slideDown('1000', function() {
+          $('#elmensaje').slideUp('2000', function() {
+
+          }).delay(750);
+        }).delay(750);
       }
 
       if(pass==""){
         correcto = false;
         $('#myModal .modal-body #pass').focus();
-        alert("Por favor, digita tu clave de acceso");
+        // alert("Por favor, digita tu clave de acceso");
+
+        $("#cualmensaje").html("<font color='white'><strong>Advertencia!</strong> Completa los campos.</font>");
+
+        $('#elmensaje').slideDown('1000', function() {
+          $('#elmensaje').slideUp('2000', function() {
+            
+          }).delay(750);
+        }).delay(750);
       }
 
       if(correcto){
@@ -413,9 +433,12 @@
 
             }
             else{
+              $("#cualmensaje").html("<font color='white'><strong>Error!</strong> Los datos no coinciden. Inténtalo nuevamente!.</font>");
 
-              alert("Los datos no coinciden. Inténtalo nuevamente!")
-
+              $('#elmensaje').slideDown('1000', function() {
+                $('#elmensaje').slideUp('2000', function() {
+                }).delay(750);
+              }).delay(750);
             }
           }
         });

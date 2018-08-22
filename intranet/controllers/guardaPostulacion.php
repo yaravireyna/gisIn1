@@ -28,7 +28,7 @@
 	      	$sql ="INSERT INTO gis.postulaciones 
 	      		(usuario, vacante, reclutador, postulado, medio, status) 
 	      		VALUES 
-	      		($idRec, $idReq, $idUser, '$fechayhora', 'RH', 1);";
+	      		($idRec, $idReq, $idUser, '$fechayhora', 'RH', 9);";
 	      	$result = mysqli_query($con, $sql);
 	        break;
 	      }
@@ -76,7 +76,7 @@
 			      	$sql ="INSERT INTO gis.postulaciones 
 			      		(usuario, vacante, reclutador, postulado, medio, status) 
 			      		VALUES 
-			      		($idNU, $idReq, $idUser, '$fechayhora', 'RH', 1);";
+			      		($idNU, $idReq, $idUser, '$fechayhora', 'RH', 9);";
 			      	$result = mysqli_query($con, $sql);
 			      	
 			    }else{
@@ -84,7 +84,7 @@
 			      	$sql ="INSERT INTO gis.postulaciones 
 			      		(usuario, vacante, reclutador, postulado, medio, status) 
 			      		VALUES 
-			      		($idUserExiste, $idReq, $idUser, '$fechayhora', 'RH', 1);";
+			      		($idUserExiste, $idReq, $idUser, '$fechayhora', 'RH', 9);";
 			      	$result = mysqli_query($con, $sql);
 			    }
 	      	}   		
@@ -131,7 +131,7 @@
 		      	$sql ="INSERT INTO gis.postulaciones 
 		      		(usuario, vacante, reclutador, postulado, medio, status) 
 		      		VALUES 
-		      		($idNU, $idReq, $idUser, '$fechayhora', 'RH', 1);";
+		      		($idNU, $idReq, $idUser, '$fechayhora', 'RH', 9);";
 		      	$result = mysqli_query($con, $sql);
 
 	      	}else{
@@ -139,7 +139,7 @@
 		      	$sql ="INSERT INTO gis.postulaciones 
 		      		(usuario, vacante, reclutador, postulado, medio, status) 
 		      		VALUES 
-		      		($idUserExiste, $idReq, $idUser, '$fechayhora', 'RH', 1);";
+		      		($idUserExiste, $idReq, $idUser, '$fechayhora', 'RH', 9);";
 		      	$result = mysqli_query($con, $sql);
 		    }
   		
