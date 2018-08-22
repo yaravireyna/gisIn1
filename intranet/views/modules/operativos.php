@@ -146,7 +146,7 @@
       ],
 
       "ajax": {
-        url: "controllers/rdataPerfiles.php?",
+        url: "controllers/rdataUsuarios.php?",
         "data": {
           "param": 0
         },
@@ -157,14 +157,14 @@
 
       "columns": [
         {"data": "id"},
-        {"data": "perfil"},
-        {"data": "cliente"},
-        {"data": "creado"},
+        {"data": "nombre"},
+        {"data": "email"},
+        {"data": "tipo"},
         {"data": "status"},
         {"data": "editar"}
       ],
       "language": {
-        "url": "controllers/dataTablesPerfiles.json"
+        "url": "controllers/dataTablesUsuarios.json"
       }
 
     });
