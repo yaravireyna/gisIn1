@@ -9,20 +9,23 @@
 		require_once "functions.php";
 
 		$con = conectar_bd();
-
 		$contadorT = 0;
-
 		$usuarios = [];
 
 		$sql ="SELECT 
 			usu.id,
 			usu.nombre,
+			usu.nom,
+			usu.appat,
+			usu.apmat,
 			usu.email,
+			usu.elpass,
 			usu.tipo,
-			usu.activo
+			usu.activo,
+			usu.img
 		FROM gis.usuarios as usu
-		where tipo != 'U';
-			;
+		where tipo != 'U'
+		ORDER BY nombre;
 		";
 
 		if (!$result = mysqli_query($con, $sql)){
@@ -47,18 +50,19 @@
 				
 				$id = $row['id'];
 				$nombreU = $row['nombre'];
+				$nom = $row['nom'];
+				$appat = $row['appat'];
+				$apmat = $row['apmat'];
+				$elpass = $row['elpass'];
 				$email = $row['email'];
 				$tipo = $row['tipo'];
+				$img = $row['img'];
 				$status = $row['activo'];
 
-				 if ($tipo =='A') $tipo = "<span title='$tipo'><i class='fas fa-chess-king'></i></span>";
-				 else if ($tipo == 'OR') $tipo = "<span title='$tipo'><i class='fas fa-chess-rook'></i></span>";
-				 else if ($tipo == 'AR') $tipo = "<span title='$tipo'><i class='fas fa-chess-queen'></i></span>";
-				 else if ($tipo == 'OA') $tipo = "<span title='$tipo'><i class='fas fa-chess-knight'></i></span>";
-
-
-				
-				
+				 if ($tipo =='A') $tipo = "<span title='Administrador'><i class='fas fa-chess-king'></i></span>";
+				 else if ($tipo == 'OR') $tipo = "<span title='Reclutador'><i class='fas fa-chess-rook'></i></span>";
+				 else if ($tipo == 'AR') $tipo = "<span title='Administrador RH'><i class='fas fa-chess-queen'></i></span>";
+				 else if ($tipo == 'OA') $tipo = "<span title='Reclutador híbrido'><i class='fas fa-chess-knight'></i></span>";
 
 				if($status==1){
 					$status = "<span title='$status'><i class='fas fa-check'></i></span>";
@@ -71,7 +75,13 @@
 				$detA[] = array(
 					'id' => $id,
 					'nombre' => $nombreU,
-					'status' => $row['status'],
+					'nom' => $nom,
+					'appat' => $appat,
+					'apmat' => $apmat,
+					'elpass' => $elpass,
+					'email' => $email,
+					'status' => $row['activo'],
+					'img' => $row['img'],
 					'tipo' => $row['tipo']
 
 				);
@@ -83,11 +93,16 @@
 				$usuarios[] = array(
 					'id' => $id,
 					'nombre' => $nombreU,
+					'nom' => $nom,
+					'appat' => $appat,
+					'apmat' => $apmat,
+					'elpass' => $elpass,
 					'email' => $email,
 					'tipo' => $tipo,
+					'img' => $row['img'],
 					'status' => $status,
 					'editar' => $editar
-								);
+				);
 			}
 		}
 

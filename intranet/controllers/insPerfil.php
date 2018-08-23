@@ -50,7 +50,7 @@
 
 	      case 'UPD' : {
 
-	  	  	$perfil = $_POST['perfil'];
+	  	  	$nombre = $_POST['perfil'];
 	  	  	$cliente = $_POST['cliente'];
 
 	  	  	$sqlV = "SELECT COUNT(*) as existe FROM gis.perfiles WHERE perfil='$perfil' AND cliente=$cliente;";

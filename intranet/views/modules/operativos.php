@@ -3,16 +3,12 @@
   session_start();
 
   if(isset($_SESSION['idUser'], $_SESSION["tipoUser"])){
-
     $idUsuario = $_SESSION['idUserU'];
     $tipoDeUsuario = $_SESSION['tipoUser'];
-
   }
   else{
-
     echo "<script type='text/javascript'> location.href = '../../../'; </script>";
     exit;
-
   }
 
 ?>
@@ -35,13 +31,13 @@
         <div class="container-fluid">
           <div class="row d-flex align-items-center">
             <div class="col-6 float-left d-flex align-items-center"><i class="material-icons">perm_contact_calendar</i> Catalogo de Usuarios</div>
-            <div class="col-6 float-right"><span class="d-flex align-items-center" style="cursor: pointer;" title="Agregar perfil" onclick="agregaPerfil();"><i class="material-icons">person_add</i> Nuevo usuario</span> </div>
+            <div class="col-6 float-right"><span class="d-flex align-items-center" style="cursor: pointer;" title="Agregar perfil" onclick="agregaUsu();"><i class="material-icons">person_add</i> Nuevo usuario</span> </div>
           </div>
         </div>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table id="tablaPerfiles" class="display table table-striped table-bordered table-hover" width="100%" cellspacing="0">
+          <table id="tablaUsuarios" class="display table table-striped table-bordered table-hover" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Id</th>
@@ -60,7 +56,7 @@
   </div>
 </div>
 
-<div id="modalPerfiles" class="modal fade" role="dialog">
+<div id="modalUsuarios" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header modal-header-success text-center w-100">
@@ -71,25 +67,58 @@
         <div class="row">
           <div class="col-12"><br></div>
         </div>
-        <p style="visibility:hidden; display:none;" id="idPerfil"></p>
+        <p style="visibility:hidden; display:none;" id="idUsuario"></p>
         <div class="input-group mb-3 col-12">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Perfil</b></span>
+            <span class="input-group-text" id="basic-addon3"><b>Nombre</b></span>
           </div>
-          <input type="text" class="form-control" id="perfil" aria-describedby="basic-addon3">
+          <input type="text" class="form-control" id="nombreU" aria-describedby="basic-addon3">
         </div>
-
         <div class="input-group mb-3 col-12">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Cliente</b></span>
+            <span class="input-group-text" id="basic-addon3"><b>Apellido paterno</b></span>
           </div>
-          <select name="cliente" id="cliente" class="form-control"></select>
+          <input type="text" class="form-control" id="apePat" aria-describedby="basic-addon3">
         </div>
-
-      </div>
+        <div class="input-group mb-3 col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"><b>Apellido materno</b></span>
+          </div>
+          <input type="text" class="form-control" id="apeMat" aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group mb-3 col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"><b>Correo</b></span>
+          </div>
+          <input type="text" class="form-control" id="emailU" aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group mb-3 col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"><b>Tipo</b></span>
+          </div>
+          <select name="tipo" id="tipo" class="form-control">
+            <option value="A">Administrador</option>
+            <option value="AR">Administrador de RH</option>
+            <option value="OR">Reclutador</option>
+            <option value="OA">Reclutador híbrido</option>
+          </select>
+       </div>
+       <div class="input-group mb-3 col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"><b>Password</b></span>
+          </div>
+          <input type="password" class="form-control" id="pww1" aria-describedby="basic-addon3">
+       </div>
+       <div class="input-group mb-3 col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"><b>Confirma password</b></span>
+          </div>
+          <input type="password" class="form-control" id="pww2" aria-describedby="basic-addon3">
+       </div>
       <div class="modal-footer text-justify">
         <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-success" onclick="updatePerfil();">Guardar</button>
+        <button type="button" id="btnUpdU"class="btn btn-success" onclick="updateUsuario();">Actualizar</button>
+        <button type="button" id="btnInsU" class="btn btn-success" onclick="insertaUsuario();">Guardar</button>
       </div>
     </div>
   </div>
@@ -101,10 +130,7 @@
 
     actualiza();
 
-    cargaClientes();
-    $('#cliente').val("0");
-
-    $('#tablaPerfiles').dataTable({
+    $('#tablaUsuarios').dataTable({
       "autoWidth": true,
       "responsive": true,
       "processing": true,
@@ -169,18 +195,11 @@
 
     });
 
-    var laTableB = $('#miTablaAsignaciones').DataTable();
-    var order = laTableB.order();
-
-
     setInterval( function () {
-      var laTable = $('#miTablaAsignaciones').DataTable();
+      var laTable = $('#tablaUsuarios').DataTable();
       laTable.ajax.reload(null, false);
       actualiza();
     }, 60000);
-
-    laTableB.order([9,'dsc'],[6, 'asc']).draw();
-
   });
 
   function AddZero(valor){
@@ -199,78 +218,179 @@
     $('#actual').html("Última actualización: " + strDateTime);
   }
 
-  function cargaClientes(){
-
-    var element = document.getElementById("cliente");
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-
-    var clientesHTML ="";
-
-    $.ajax({
-
-      type: 'POST',
-      url: 'controllers/rdataClientes.php',
-
-      success: function (response) {
-
-        if (response.info[0].success) {
-
-          for(var i=0; i<response.clientes.length; i++){
-            clientesHTML = clientesHTML + "<option value="+response.clientes[i].id+">"+response.clientes[i].nombre+"</option>";         
-          }
-
-        }       
-
-        $("#cliente").append(clientesHTML);
-      }
-    });
-    return false;
-  }
-
-  $('#modalPerfiles').on('hidden.bs.modal', function (e) {
+  $('#modalUsuarios').on('hidden.bs.modal', function (e) {
     $('#cliente').val("0");
   });
 
-  function agregaPerfil(){
-    showMessage("hola mi amor");
+  function agregaUsu(){
+    $('#elHeaderConNombre').html('Agregar usuario');
+    $('#idUsuario').html('');
+    $('#nombreU').val('');
+    $('#apePat').val('');
+    $('#apeMat').val('');
+    $('#tipo').val('0');
+    $('#emailU').val('');
+    $('#pww1').val('');
+    $('#pww1').val('');
+    $('#btnUpdU').hide();
+    $('#btnInsU').show(); 
+    
+    $('#modalUsuarios').modal('show');
   }
+  
 
   function modificar(detalles){
+    $('#elHeaderConNombre').html('Editar ' + detalles[0].nombre);
+    $('#idUsuario').html(detalles[0].id);
+    $('#nombreU').val(detalles[0].nom);
+    $('#apePat').val(detalles[0].appat);
+    $('#apeMat').val(detalles[0].apmat);
+    $('#tipo').val(detalles[0].tipo);
+    $('#emailU').val(detalles[0].email);
+    $('#pww1').val(detalles[0].elpass);
+    $('#pww2').val(detalles[0].elpass);
+    $('#btnUpdU').show();
+    $('#btnInsU').hide(); 
 
-    $('#elHeaderConNombre').html('Editar ' + detalles[0].perfil);
-    $('#idPerfil').html(detalles[0].id);
-    $('#perfil').val(detalles[0].perfil);
-    $('#cliente').val(detalles[0].idCliente);
-
-    $('#modalPerfiles').modal('show');
+    $('#modalUsuarios').modal('show');
 
   }
 
-  function updatePerfil(){
-
+  function insertaPerfil(){
     var ok = true;
+    var nombre = $('#nombreU').val();
+    var apeP = $('#apePat').val();
+    var apeM = $('#apeMat').val();
+    var tpo = $('select#tipo').val();
+    var email = $('#emailU').val();
+    var pass1 = $('#pww1').val();
+    var pass2 = $('#pww2').val();
+    
+    // Se establece el campo nombre completo
+    var nombreC = nombre + " " +apeP+ "" +apeM;
 
-    var idPerf = $('#idPerfil').html();
-    var perfil = $('#perfil').val();
-    var cliente = $('#cliente').val();
-
-    if(perfil==""){
+    if(nombre==""){
       ok=false;
-      showInfo("Complete el título para el perfil");
-      $('#perfil').focus();
+      showInfo("Complete el nombre del usuario");
+      $('#nombreU').focus();
+      e.defaultPrevent();
+    }
+    if(email==""){
+      ok=false;
+      showInfo("Complete el correo electrónico");
+      $('#emailU').focus();
+      e.defaultPrevent();
+    }
+    if(pass1==""){
+      ok=false;
+      showInfo("Complete el campo de password");
+      $('#pww1').focus();
+      e.defaultPrevent();
+    }
+    if(pass2==""){
+      ok=false;
+      showInfo("Complete el campo de password");
+      $('#pww2').focus();
+      e.defaultPrevent();
+    }
+    if(pass1 != pass2) {
+      ok= false;
+      showInfo("Las contraseñas ingresadas deben coincidir");
+      $('#pww1').focus();
+      $('#pww2').focus();
       e.defaultPrevent();
     }
 
     if(ok){
       $.ajax({
         type: 'POST',
-        url: 'controllers/insPerfil.php',
+        url: 'controllers/insUsuario.php',
         data: {
-          'id': idPerf,
-          'perfil': perfil,
-          'cliente': cliente,
+          'id': 0,
+          'email': email,
+          'action' : 'INS'
+        },
+
+        success: function (response) {
+
+          if (response.info[0].success) {
+
+            var miTable = $('#tablaUsuarios').DataTable();
+            miTable.ajax.reload(null, false);
+
+            $('#cliente').val('0');
+
+            showMessage("El usuario "+nombreC+" se agrego exitosamente!");
+            $('#modalUsuarios').modal('hide');
+
+          }else if(response.info[0].error=='EXISTE'){
+            showInfo("Ya existe el usuario "+nombreC);
+          }else showError("Ocurrio un error. Intentalo nuevamente");
+        }
+      });
+      return false;
+    }
+  }
+
+  function updateUsuario(){
+    var ok = true;
+    var id = $('#idUsuario').html();
+    var nombre = $('#nombreU').val();
+    var apeP = $('#apePat').val();
+    var apeM = $('#apeMat').val();
+    var tpo = $('select#tipo').val();
+    var email = $('#emailU').val();
+    var pass1 = $('#pww1').val();
+    var pass2 = $('#pww2').val();    
+
+    // Se establece el campo nombre completo
+    var nombreC = nombre + " " +apeP+ "" +apeM;
+
+    if(nombre==""){
+      ok=false;
+      showInfo("Complete el nombre del usuario");
+      $('#nombreU').focus();
+      e.defaultPrevent();
+    }
+    if(email==""){
+      ok=false;
+      showInfo("Complete el correo electrónico");
+      $('#emailU').focus();
+      e.defaultPrevent();
+    }
+    if(pass1==""){
+      ok=false;
+      showInfo("Complete el campo de password");
+      $('#pww1').focus();
+      e.defaultPrevent();
+    }
+    if(pass2==""){
+      ok=false;
+      showInfo("Complete el campo de password");
+      $('#pww2').focus();
+      e.defaultPrevent();
+    }
+    if(pass1 != pass2) {
+      ok= false;
+      showInfo("Las contraseñas ingresadas deben coincidir");
+      $('#pww1').focus();
+      $('#pww2').focus();
+      e.defaultPrevent();
+    }
+
+    if(ok){
+      $.ajax({
+        type: 'POST',
+        url: 'controllers/insUsuario.php',
+        data: {
+          'id': id,
+          'nombre': nombre,
+          'nombreC': nombreC,
+          'ap': apeP,
+          'am': apeM,
+          'tpo': tpo,
+          'em': email,
+          'nvop': pass1,
           'action' : 'UPD'
         },
 
@@ -278,14 +398,14 @@
 
           if (response.info[0].success) {
 
-            var miTable = $('#tablaPerfiles').DataTable();
+            var miTable = $('#tablaUsuarios').DataTable();
             miTable.ajax.reload(null, false);
 
-            showMessage("El perfil "+perfil+" se actualizó exitosamente!");
-            $('#modalPerfiles').modal('hide');
+            showMessage("El usuario"+ nombre +" se actualizó exitosamente!");
+            $('#modalUsuarios').modal('hide');
 
           }else if(response.info[0].error=='EXISTE'){
-            showInfo("Ya existe el perfil "+perfil+" asignado a este cliente!");
+            showInfo("Ya existe el usuario "+ nombre);
           }else showError("Ocurrio un error. Intentalo nuevamente");
         }
       });
@@ -307,7 +427,7 @@
     }
 
     swal({
-      title: "Realmente deseas " + hab + " el perfil \""+detalles[0].perfil+"\"?",
+      title: "Realmente deseas " + hab + " el usuario \""+detalles[0].nombre+"\"?",
       type: "warning",
       showCancelButton: true,
       confirmButtonClass: "btn-danger",
@@ -321,7 +441,7 @@
         
         $.ajax({
           type: 'POST',
-          url: 'controllers/insPerfil.php',
+          url: 'controllers/insUsuario.php',
           data: {
             'id': detalles[0].id,
             'status': detalles[0].status,
@@ -332,10 +452,10 @@
 
             if (response.info[0].success) {
 
-              var miTable = $('#tablaPerfiles').DataTable();
+              var miTable = $('#tablaUsuarios').DataTable();
               miTable.ajax.reload(null, false);
 
-              var message = "El perfil \"" + detalles[0].perfil + "\", ha sido " + hab2;
+              var message = "El usuario \"" + detalles[0].nombre + "\", ha sido " + hab2;
               showMessage(message);
 
             }
