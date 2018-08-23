@@ -115,6 +115,7 @@
           </div>
           <input type="password" class="form-control" id="pww2" aria-describedby="basic-addon3">
        </div>
+       </div>
       <div class="modal-footer text-justify">
         <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
         <button type="button" id="btnUpdU"class="btn btn-success" onclick="updateUsuario();">Actualizar</button>
