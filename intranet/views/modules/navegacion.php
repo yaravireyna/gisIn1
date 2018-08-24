@@ -83,12 +83,6 @@
               <span class="nav-link-text">Candidatos</span>
             </a>
           </li>
-          <li>
-            <a href="index.php?action=candidatos_cv ">
-              <i class="far fa-id-card"></i>
-              <span class="nav-link-text">CV's</span>
-            </a>
-          </li>
         </ul>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tracking">
@@ -169,12 +163,6 @@
               <span class="nav-link-text">Candidatos</span>
             </a>
           </li>
-          <li>
-            <a href="index.php?action=candidatos_cv ">
-              <i class="far fa-id-card"></i>
-              <span class="nav-link-text">CV's</span>
-            </a>
-          </li>
         </ul>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tracking">
@@ -226,12 +214,6 @@
             <a href="index.php?action=candidatos">
               <i class="fas fa-user-tie"></i>
               <span class="nav-link-text">Candidatos</span>
-            </a>
-          </li>
-          <li>
-            <a href="index.php?action=candidatos_cv ">
-              <i class="far fa-id-card"></i>
-              <span class="nav-link-text">CV's</span>
             </a>
           </li>
         </ul>
@@ -305,12 +287,6 @@
             <a href="index.php?action=candidatos">
               <i class="fas fa-user-tie"></i>
               <span class="nav-link-text">Candidatos</span>
-            </a>
-          </li>
-          <li>
-            <a href="index.php?action=candidatos_cv ">
-              <i class="far fa-id-card"></i>
-              <span class="nav-link-text">CV's</span>
             </a>
           </li>
         </ul>

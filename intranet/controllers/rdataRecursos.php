@@ -107,25 +107,14 @@
 					'citasC' => $citasC,
 					'statusF' => $statusF
 				);
-
-				// $detalles = "<span title='Postular candidatos para $puesto' onclick='verVideo(".json_encode($detA).");return false;'><i class='far fa-address-book'></i></span>";
-
-				// $cv = "<span title='Ver CV de $nombre' onclick='verCV(".json_encode($detA).");return false;'><i class='far fa-address-book'></i></span>";
-
+								
 				if($archivo!=""){
 					$cv = "<a href='views/modules/src/pdf/".$archivo."' target='_blank'><span class='red' title='Ver CV de $nombre'><i class='far fa-address-book'></i></span></a>";
 
 					if($postulado==0){
 						$postular = "<span title='Postular a $nombre' onclick='postularCandidato(".json_encode($detA).");return false;'><button type='button' class='btn btn-danger btn-rounded btn-md ml-4'>Postular</button></span>";
 					}
-					// else{
-
-					// 	$postular = "<span class='red' title='$nombre ya se ha postulado esta vacante!'><i class='fas fa-thumbs-up'></i></span>";
-						
-					// 	$citasR = "<span title='Agendar cita con $nombre con GIS' onclick='agendaCita(".json_encode($detA).",'R');return false;'><i class='material-icons'>alarm_on</i></span>";
-
-					// 	$citasC = "<span title='Agendar cita con $nombre con cliente' onclick='agendaCita(".json_encode($detA).",'C');return false;'><i class='material-icons'>alarm_on</i></span>";
-					// }
+					
 				}else{
 					$cv="";
 					$postular="";

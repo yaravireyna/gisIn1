@@ -57,65 +57,82 @@
 </div>
 
 <div id="modalUsuarios" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header modal-header-success text-center w-100">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="far fa-times-circle"></i></button>
         <div><i class="material-icons text-white" style="font-size: 2.5rem;">assignment_ind</i> <p class="in-line display-5" id="elHeaderConNombre" style="color:#fff;"> </p></div>
       </div>
+          
       <div class="modal-body">
-        <div class="row">
-          <div class="col-12"><br></div>
+        <div class="form-group">
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <img id="imageUser" src="views/modules/img/user/perfil.png" class="img-responsive" width="100%">
+              </div>
+              <div class="col-8 text-justify">
+                <div class="row">
+                  <div class="col-12">
+                    <div><br></div>
+                  </div>
+                  <p style="visibility:hidden; display:none;" id="idUsuario"></p>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Nombre</b></span>
+                    </div>
+                    <input type="text" class="form-control" id="nombreU" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Apellido paterno</b></span>
+                    </div>
+                    <input type="text" class="form-control" id="apePat" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Apellido materno</b></span>
+                    </div>
+                    <input type="text" class="form-control" id="apeMat" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Correo</b></span>
+                    </div>
+                    <input type="text" class="form-control" id="emailU" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Tipo</b></span>
+                    </div>
+                    <select name="tipo" id="tipo" class="form-control">
+                      <option value="A">Administrador</option>
+                      <option value="AR">Administrador de RH</option>
+                      <option value="OR">Reclutador</option>
+                      <option value="OA">Reclutador híbrido</option>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Password</b></span>
+                    </div>
+                    <input type="password" class="form-control" id="pww1" aria-describedby="basic-addon3">
+                  </div>
+                  <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3"><b>Confirma password</b></span>
+                    </div>
+                    <input type="password" class="form-control" id="pww2" aria-describedby="basic-addon3">
+                  </div>                   
+                </div>
+              </div>  
+                        
+            </div>
+          </div>          
         </div>
-        <p style="visibility:hidden; display:none;" id="idUsuario"></p>
-        <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Nombre</b></span>
-          </div>
-          <input type="text" class="form-control" id="nombreU" aria-describedby="basic-addon3">
-        </div>
-        <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Apellido paterno</b></span>
-          </div>
-          <input type="text" class="form-control" id="apePat" aria-describedby="basic-addon3">
-        </div>
-        <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Apellido materno</b></span>
-          </div>
-          <input type="text" class="form-control" id="apeMat" aria-describedby="basic-addon3">
-        </div>
-        <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Correo</b></span>
-          </div>
-          <input type="text" class="form-control" id="emailU" aria-describedby="basic-addon3">
-        </div>
-        <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Tipo</b></span>
-          </div>
-          <select name="tipo" id="tipo" class="form-control">
-            <option value="A">Administrador</option>
-            <option value="AR">Administrador de RH</option>
-            <option value="OR">Reclutador</option>
-            <option value="OA">Reclutador híbrido</option>
-          </select>
-       </div>
-       <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Password</b></span>
-          </div>
-          <input type="password" class="form-control" id="pww1" aria-describedby="basic-addon3">
-       </div>
-       <div class="input-group mb-3 col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"><b>Confirma password</b></span>
-          </div>
-          <input type="password" class="form-control" id="pww2" aria-describedby="basic-addon3">
-       </div>
-       </div>
+      </div>
+
+
       <div class="modal-footer text-justify">
         <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
         <button type="button" id="btnUpdU"class="btn btn-success" onclick="updateUsuario();">Actualizar</button>
@@ -196,11 +213,17 @@
 
     });
 
+    var laTableB = $('#tablaUsuarios').DataTable();
+    var order = laTableB.order();
+
     setInterval( function () {
       var laTable = $('#tablaUsuarios').DataTable();
       laTable.ajax.reload(null, false);
       actualiza();
     }, 60000);
+
+    laTableB.order([1,'asc']).draw();
+
   });
 
   function AddZero(valor){
@@ -224,6 +247,8 @@
   });
 
   function agregaUsu(){
+    $('#imageUser').attr('src','views/modules/img/user/perfil.png');
+
     $('#elHeaderConNombre').html('Agregar usuario');
     $('#idUsuario').html('');
     $('#nombreU').val('');
@@ -232,7 +257,7 @@
     $('#tipo').val('0');
     $('#emailU').val('');
     $('#pww1').val('');
-    $('#pww1').val('');
+    $('#pww2').val('');
     $('#btnUpdU').hide();
     $('#btnInsU').show(); 
     
@@ -253,11 +278,13 @@
     $('#btnUpdU').show();
     $('#btnInsU').hide(); 
 
+    $('#imageUser').attr('src','views/modules/img/user/'+detalles[0].img);
+
     $('#modalUsuarios').modal('show');
 
   }
 
-  function insertaPerfil(){
+  function insertaUsuario(){
     var ok = true;
     var nombre = $('#nombreU').val();
     var apeP = $('#apePat').val();
@@ -268,7 +295,7 @@
     var pass2 = $('#pww2').val();
     
     // Se establece el campo nombre completo
-    var nombreC = nombre + " " +apeP+ "" +apeM;
+    var nombreC = nombre + " " +apeP+ " " +apeM;
 
     if(nombre==""){
       ok=false;
@@ -308,7 +335,12 @@
         url: 'controllers/insUsuario.php',
         data: {
           'id': 0,
+          'nombre': nombre,
+          'ap': apeP,
+          'am': apeM,
+          'tipo': tpo,
           'email': email,
+          'pass': pass1,
           'action' : 'INS'
         },
 
@@ -345,7 +377,7 @@
     var pass2 = $('#pww2').val();    
 
     // Se establece el campo nombre completo
-    var nombreC = nombre + " " +apeP+ "" +apeM;
+    var nombreC = nombre + " " +apeP+ " " +apeM;
 
     if(nombre==""){
       ok=false;

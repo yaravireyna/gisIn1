@@ -146,6 +146,10 @@ span i.fas, span i.far, span i.fab{
   cursor: pointer;
 }
 
+span i.material-icons{
+  font-size: 2rem;
+  cursor: pointer;
+}
 span.red i.fas, span.red i.far, span.red i.fab{
   font-size: 1.8rem;
   cursor: pointer;

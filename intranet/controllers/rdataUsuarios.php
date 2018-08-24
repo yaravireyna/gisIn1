@@ -59,6 +59,11 @@
 				$img = $row['img'];
 				$status = $row['activo'];
 
+				// var_dump($img);
+
+				if(is_null($img) || $img=="" || $img==NULL) $img = "perfil.png";
+				//$img ="perfil.png";
+
 				 if ($tipo =='A') $tipo = "<span title='Administrador'><i class='fas fa-chess-king'></i></span>";
 				 else if ($tipo == 'OR') $tipo = "<span title='Reclutador'><i class='fas fa-chess-rook'></i></span>";
 				 else if ($tipo == 'AR') $tipo = "<span title='Administrador RH'><i class='fas fa-chess-queen'></i></span>";
@@ -81,7 +86,7 @@
 					'elpass' => $elpass,
 					'email' => $email,
 					'status' => $row['activo'],
-					'img' => $row['img'],
+					'img' => $img,
 					'tipo' => $row['tipo']
 
 				);
@@ -99,7 +104,7 @@
 					'elpass' => $elpass,
 					'email' => $email,
 					'tipo' => $tipo,
-					'img' => $row['img'],
+					'img' => $img,
 					'status' => $status,
 					'editar' => $editar
 				);

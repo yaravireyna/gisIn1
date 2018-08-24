@@ -8,7 +8,7 @@
 
 		date_default_timezone_set('America/Mexico_City');
 
-   	$fechayhora = date('Y-m-d H:i:s');
+   		$fechayhora = date('Y-m-d H:i:s');
 
 		$con = conectar_bd();
 
@@ -17,13 +17,14 @@
 		$id = $_POST['id'];
 		$queOper = $_POST['action'];
 
-			$nombre = $_POST['nombre'];
-			$ap = $_POST['ap'];
-			$am = $_POST['am'];
-			$email = $_POST['email'];
-			$pass = $_POST['pass'];
+		$nombre = $_POST['nombre'];
+		$ap = $_POST['ap'];
+		$am = $_POST['am'];
+		$email = $_POST['email'];
+		$tipo = $_POST['tipo'];
+		$pass = $_POST['pass'];
 
-			$nombreC = $nombre." ".$ap." ".$am;
+		$nombreC = $nombre." ".$ap." ".$am;
 		
 		
 		switch($queOper){
@@ -36,17 +37,17 @@
 
 				if($existe>0){
 					$info[] = array (
-					'id' => 0,
-					'success' => false,
-					'error' => "EXISTE"
-				);
+						'id' => 0,
+						'success' => false,
+						'error' => "EXISTE"
+					);
 
-			echo json_encode(array('info' => $info));
+					echo json_encode(array('info' => $info));
 
 					die();
 
 				}else{
-					$sql = "INSERT INTO gis.usuarios (nombre, email, elpass, nom, appat, apmat, ultimoacceso, registro, tipo, statuslink) VALUES ('$nombreC', '$email', '$pass', '$nombre', '$ap', '$am', '$fechayhora', '$fechayhora', 'U', 8);";
+					$sql = "INSERT INTO gis.usuarios (nombre, email, elpass, nom, appat, apmat, ultimoacceso, registro, tipo) VALUES ('$nombreC', '$email', '$pass', '$nombre', '$ap', '$am', '$fechayhora', '$fechayhora', '$tipo');";
 					$result = mysqli_query($con, $sql);
 				}
 				
